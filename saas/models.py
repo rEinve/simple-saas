@@ -33,8 +33,8 @@ class Business(models.Model):
 
 
 class Subscription(models.Model):
-	business                 = models.ForeignKey(Business)
-	plan                     = models.ForeignKey(Plan)
+	business                 = models.ForeignKey('Business', on_delete=models.PROTECT)
+	plan                     = models.ForeignKey('Plan', on_delete=models.PROTECT)
 	is_active                = models.BooleanField(default=False)
 	created_at               = models.DateTimeField(auto_now_add=True)
 	start_time               = models.DateTimeField()
@@ -45,8 +45,8 @@ class Subscription(models.Model):
 		return self.business.__unicode__() + "_" + str(self.id)
 
 class BusinessTeamMember(models.Model):
-	business            = models.ForeignKey(Business)
-	user                = models.ForeignKey(User)
+	business            = models.ForeignKey('Business', on_delete=models.PROTECT)
+	user                = models.ForeignKey('User', on_delete=models.PROTECT)
 	activation_key      = models.CharField(max_length=36)
 	created_at          = models.DateTimeField(auto_now_add=True)
 	last_updated_on     = models.DateTimeField(auto_now=True)
